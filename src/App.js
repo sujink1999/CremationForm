@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Form from "./components/Form"
+import Mobile from "./components/Mobile"
+import CremationDetails from "./components/CremationDetails"
+import React, {Component} from "react";
+import DetailsDisplay from "./components/DetailsDisplay";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  state = {}
+
+  update = values => {
+    this.setState(
+      {
+        ...values
+      }
+    )
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route path="/" exact render={() => <Mobile update={this.update} />}/>
+            <Route path="/form" render={() => <Form update={this.update}/>}/>
+            <Route path="/cremation-details" render={() => <CremationDetails update={this.update}/>}/>
+            <Route path="/details-display" render = {()=><DetailsDisplay data={this.state}/>}/>
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
